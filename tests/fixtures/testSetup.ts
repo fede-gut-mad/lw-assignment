@@ -1,8 +1,8 @@
 import { test } from '@playwright/test';
-import { removeCookieBanner } from '../helpers/helpers.ts';
+import { removeCookieBanner } from '../helpers/helpers';
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('https://www.languagewire.com/products/languagewire-translate/');
+  await page.goto('/products/languagewire-translate/');
   await page.waitForTimeout(3000);
   await removeCookieBanner(page);
 });

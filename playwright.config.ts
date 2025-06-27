@@ -6,12 +6,12 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: 1,
   timeout: 30000,
-  // workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {
-    baseURL: 'https://www.languagewire.com/products/languagewire-translate/',
+    baseURL: 'https://www.languagewire.com',
     trace: 'retain-on-failure', //'on-first-retry'
-    headless: false, //switch to true for CI
+    headless: true, //switch to true for CI
     viewport: { width: 1280, height: 720 }, //to set a default viewport size
     ignoreHTTPSErrors: true, //to avoid HTTPS errors
     // video: 'retain-on-failure',
