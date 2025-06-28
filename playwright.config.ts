@@ -11,6 +11,7 @@ export default defineConfig({
   use: {
     baseURL: 'https://www.languagewire.com',
     trace: 'retain-on-failure', //'on-first-retry'
+    screenshot: 'only-on-failure',
     headless: true, //switch to true for CI
     viewport: { width: 1280, height: 720 }, //to set a default viewport size
     ignoreHTTPSErrors: true, //to avoid HTTPS errors
