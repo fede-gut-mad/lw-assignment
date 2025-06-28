@@ -1,7 +1,8 @@
+import { TranslatorWidget } from '../pages/TranslatorWidget';
 import { expect } from '@playwright/test'; 
 import { test } from '../fixtures/fixtures';
 import '../fixtures/testSetup';
-import { validateOkResponseApi, setLanguageOption } from '../helpers/helpers';
+import { validateOkResponseApi } from '../helpers/helpers';
 
 export const Languages = {
     Danish: 'Danish',
@@ -15,26 +16,14 @@ export const Languages = {
     Swedish: 'Swedish',
 }
 
-export const selectors = {
-    iframeTranslator: '#lwt-widget',
-};
-
 test('Reload and verify language selection', async ({page, deviceType}) => {
-    //Handle the iframe
-    const frame = page.frameLocator(selectors.iframeTranslator);
-    
-    //set translation to Danish
-    await setLanguageOption(frame, Languages.Danish, deviceType);
+    const translator = new TranslatorWidget(page);
 
-    // Reload the full page or the iframe
+    await translator.selectLanguage(Languages.Danish, deviceType);
     await page.reload();
-
     await page.waitForLoadState('domcontentloaded');
-
-    const newFrame = page.frameLocator(selectors.iframeTranslator);
-
+    const newFrame = page.frameLocator('#lwt-widget');
     // Assert that Danish is still the selected target language
     await expect(newFrame.getByRole('button', { name: Languages.Danish })).toBeVisible();
-        
 
 })

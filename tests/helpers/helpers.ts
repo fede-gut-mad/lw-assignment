@@ -23,18 +23,19 @@ export async function validateOkResponseApi(page: Page, callUrl:string, status: 
         {timeout: 5000} 
     );
     console.log(`'API response received for ${callUrl}:'`, response.status(), response.statusText());
-}catch (error) {
+  } catch (error) {
     console.error(`'API response error received for ${callUrl}:'`, error);
-}
+    throw error
+  }
 }
 
-export async function setLanguageOption(frame: any, language: string, deviceType?: string) {
-  const isMobile: boolean = deviceType === 'mobile';
-  if (isMobile) {
-    await frame.getByRole('button', { name: 'English (UK)' }).click();
-    await frame.getByText(language).click();
-  } else {
-    await frame.getByText('English (UK)keyboard_arrow_down').click();
-    await frame.getByText(language).click();
+export async function checkForUnexpectedError(page: Page): Promise<boolean> {
+  const frame = page.frameLocator('#lwt-widget');
+  const errorPopup = frame.getByText('An unexpected error has');
+
+  try {
+    return await errorPopup.isVisible();
+  } catch {
+    return false; // If not found, treat as no error
   }
-} 
+}
