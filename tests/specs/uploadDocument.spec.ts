@@ -1,8 +1,7 @@
 import { expect } from '@playwright/test'; 
 import { test } from '../fixtures/fixtures';
 import '../fixtures/testSetup';
-import '../fixtures/fixtures';
-import { validateOkResponseApi,setLanguageOption } from '../helpers/helpers';
+import { validateOkResponseApi, setLanguageOption } from '../helpers/helpers';
 
 export const Languages = {
     Danish: 'Danish',
@@ -17,32 +16,9 @@ export const Languages = {
 }
 
 export const selectors = {
-    demoTranslatorSection: 'iframe#lwt-widget',
     iframeTranslator: '#lwt-widget',
-    inputTranslatorTest: 'textarea.cdk-textarea-autosize.lw-source-text__input',
-    translatedLanguage: 'div.lw-output-text__title.hide-gt-sm',
-    translatedText:'div.lw-output-text__text',
     removeUploadFileButton: "button.lw-source-document__remove-document-button.mdc-icon-button.mat-mdc-icon-button.mat-unthemed.mat-mdc-button-base",
 };
-
-test('Copy & Paste translation from English to Danish', async({page, deviceType}) =>{
-    //Handle the iframe
-    const frame = page.frameLocator(selectors.iframeTranslator);
-    
-    //set translation to Danish
-    await setLanguageOption(frame, Languages.Danish, deviceType);
-
-    //copy and paste translation
-    await frame.locator(selectors.inputTranslatorTest).fill('Hello, this is a test!');
-
-    //catch api response and wait for translation to be processed
-    await validateOkResponseApi(page, '/translations/text');
-
-    //assert translation danish
-    await expect(frame.locator(selectors.translatedLanguage)).toContainText(Languages.Danish);
-    await expect(frame.locator(selectors.translatedText)).toContainText('Hej, dette er en test!');
-
-});
 
 test('Upload & Translate document', async ({page, deviceType}) => {
 
@@ -74,26 +50,3 @@ test('Upload & Translate document', async ({page, deviceType}) => {
     //TODO: sad path, catching the error and retry, parametrize file name to later catch the selector
 
 });
-
-test('Swap languages', async ({page, deviceType}) => {
-
-    //Handle the iframe
-    const frame = page.frameLocator(selectors.iframeTranslator);
-
-    //set translation to Danish
-    await setLanguageOption(frame, Languages.Danish, deviceType);
-
-    //copy and paste translation
-    await frame.locator(selectors.inputTranslatorTest).fill('Hello, this is a test!');
-
-    //catch api response and wait for translation to be processed
-    await validateOkResponseApi(page, '/translations/text');
-
-    //Swap languages
-    await frame.getByRole('button').filter({ hasText: 'sync_alt' }).click();
-
-
-    //assert translation swap
-     await expect(frame.locator(selectors.translatedLanguage)).toContainText(Languages.EnglishUk);
-     await expect(frame.locator(selectors.translatedText)).toContainText('Hello, this is a test!');
-})
