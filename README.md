@@ -4,7 +4,8 @@
 
 - Playwright with TypeScript
 - Target CI/CD: Azure DevOps
-- Performance test (planned) Gatling
+- Performance test using k6
+- Accessibility testing with axe-core
 
 ## **Overview**
 
