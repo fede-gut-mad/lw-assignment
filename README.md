@@ -120,3 +120,29 @@ Report is saved to tests/reports/accessibility-report.html and it includes total
 
 -Environment variables (e.g. DEVICE, BASE_URL) can be injected via pipeline settings or .env files.
 ```
+
+## **CI/CD Integration (Azure DevOps)**
+
+This project includes a placeholder setup for Azure DevOps pipelines.
+
+azure-pipelines.yml
+The azure-pipelines.yml file is located in the root directory and defines a basic CI/CD pipeline for:
+
+-Installing dependencies
+-Running Playwright tests in headless mode
+-Generating accessibility reports (axe-core)
+
+-Pipeline Highlights
+-Node.js environment setup with npm dependencies
+-npx playwright install for browser dependencies
+-Execution of all tests with HTML reporting
+-Artifacts are stored and published if needed
+
+-How to use
+To use the pipeline:
+1.Push this project to a Git repository (e.g., Azure Repos or GitHub).
+2.Link the repo to Azure DevOps.
+3.Create a new pipeline using the azure-pipelines.yml in the root.
+4.Run the pipeline and monitor test execution + reports.
+
+Note: Performance testing with k6 is currently excluded.

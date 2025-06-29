@@ -1,10 +1,10 @@
 import http from "k6/http";
 import { check, sleep } from "k6";
-import { htmlReport } from "https://raw.githubusercontent.com/avito-tech/k6-reporter/main/dist/bundle.js";
+import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js";
 
 export const options = {
   vus: 2, // virtual users
-  duration: "1m", // duration of the test
+  duration: "15s", // duration of the test
 };
 
 export default function () {
@@ -33,13 +33,16 @@ export default function () {
     "response time < 500ms": (r) => r.timings.duration < 500,
   });
 
-  sleep(1); // wait 1 second between requests to reduce load
+  sleep(2); // wait 2 seconds between requests to reduce load
 
   console.log(res.status, res.body);
 }
 
 export function handleSummary(data) {
   return {
-    "reports/performance-report.html": htmlReport(data),
+    // Save raw JSON of all metrics
+    "k6-summary.json": JSON.stringify(data, null, 2),
+    // And generate a pretty HTML report
+    "performance-report.html": htmlReport(data),
   };
 }
