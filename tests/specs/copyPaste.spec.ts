@@ -1,5 +1,4 @@
 import { TranslatorWidget } from '../pages/TranslatorWidget';
-import { expect } from '@playwright/test'; 
 import { test } from '../fixtures/fixtures';
 import '../fixtures/testSetup';
 import { validateOkResponseApi } from '../helpers/helpers';

@@ -74,7 +74,7 @@ Tests use Playwright’s project feature to cover multiple devices and viewport 
 
 -Many elements lack unique selectors (e.g. missing data-testid, id, or unique aria-labels), making some locators brittle or dependent on visible text.
 
-## **Responsiveness and Performance Testing**
+## **Responsiveness**
 
 -Viewport sizes tests:
 --Tablet (1024x768)
@@ -83,12 +83,40 @@ Tests use Playwright’s project feature to cover multiple devices and viewport 
 --Desktop Full (1920x1080)
 --Mobile (Pixel 5)
 
--Performance testing TODO
+## **Performance Testing with k6**
 
--Accesibility testing TODO
+You can simulate traffic to the text translation endpoint using k6 (https://k6.io/):
+
+Install k6(for mac):
+
+```
+brew install k6
+
+
+To run the load test and generate an html report
+
+```
+
+k6 run tests/performance/load-test.js --out json=test.json
+
+## **Accessibility Testing**
+
+This project includes an automated accessibility test powered by @axe-core/playwright and axe-html-reporter.
+
+It loads the page using PW and runs an accessibility scan using axe-core. Finally, generates an html report listing all accessibility violations.
+
+There is an option to comment the final assetions and turn strict mode off
+
+To run the accessibility test on a particular device
+
+```
+npx playwright test tests/specs/accessibility.spec.ts --project=desktop-full
+
+Report is saved to tests/reports/accessibility-report.html and it includes total violations count, grouped by severity and then a snippet with a summary and fix suggestions
 
 ## **CI/CD Integration**
 
 -Tests can be integrated into Azure DevOps pipelines by running the appropriate npx playwright test commands.
 
 -Environment variables (e.g. DEVICE, BASE_URL) can be injected via pipeline settings or .env files.
+```
