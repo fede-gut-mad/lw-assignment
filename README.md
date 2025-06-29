@@ -33,7 +33,7 @@ Steps
 2. Clone the repo (lw-assignment)
 3. Install dependencies
 
-```bash
+```
 npm install
 npx playwright install
 npm install --save-dev @types/node
