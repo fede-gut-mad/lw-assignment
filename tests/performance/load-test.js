@@ -40,8 +40,6 @@ export default function () {
 
 export function handleSummary(data) {
   return {
-    "summary.html": htmlReport(data),
+    "reports/performance-report.html": htmlReport(data),
   };
-
-
-// k6 run testscript.js --out json=test.json
+}

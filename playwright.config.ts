@@ -7,7 +7,7 @@ export default defineConfig({
   retries: 2,
   timeout: 30000,
   workers: process.env.CI ? 1 : undefined,
-  reporter: 'html',
+  reporter: [['html', { open: 'always' }]],
   use: {
     baseURL: 'https://www.languagewire.com',
     trace: 'retain-on-failure', //'on-first-retry'
@@ -19,26 +19,6 @@ export default defineConfig({
   },
   projects: [
     {
-      name: 'tablet',
-      use: { 
-        ...devices['Desktop Chrome'], 
-        viewport: { 
-          width: 1024,
-          height: 768 
-          } 
-      },
-    },
-    {
-      name: 'laptop',
-      use: { 
-        ...devices['Desktop Chrome'], 
-        viewport: { 
-          width: 1280, 
-          height: 800 
-        } 
-      },
-    },
-    {
       name: 'desktop-standard',
       use: { 
         ...devices['Desktop Chrome'], 
@@ -48,20 +28,42 @@ export default defineConfig({
         } 
       },
     },
-    {
-      name: 'desktop-full',
-      use: { 
-        ...devices['Desktop Chrome'], 
-        viewport: { 
-          width: 1920, 
-          height: 1080 
-        } 
-      },
-    },
-    {
-      name: 'mobile',
-      use: { 
-        ...devices['Pixel 5'] },
-    },
+    // Uncomment the following projects to enable testing on different devices
+    // Currently disabled due to website security restrictions on multiple requests
+    // {
+    //   name: 'tablet',
+    //   use: { 
+    //     ...devices['Desktop Chrome'], 
+    //     viewport: { 
+    //       width: 1024,
+    //       height: 768 
+    //       } 
+    //   },
+    // },
+    // {
+    //   name: 'laptop',
+    //   use: { 
+    //     ...devices['Desktop Chrome'], 
+    //     viewport: { 
+    //       width: 1280, 
+    //       height: 800 
+    //     } 
+    //   },
+    // },
+    // {
+    //   name: 'desktop-full',
+    //   use: { 
+    //     ...devices['Desktop Chrome'], 
+    //     viewport: { 
+    //       width: 1920, 
+    //       height: 1080 
+    //     } 
+    //   },
+    // },
+    // {
+    //   name: 'mobile',
+    //   use: { 
+    //     ...devices['Pixel 5'] },
+    // },
   ],
 });

@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Languagewire Job Assignment",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "docker:test": "docker build -t lw-playwright . && docker run --rm -v $PWD:/usr/src/app -w /usr/src/app lw-playwright"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -12,9 +14,8 @@
     "@playwright/test": "^1.53.1",
     "@types/axe-core": "^2.0.2",
     "@types/node": "^24.0.6",
-    "axe-core": "^4.10.3"
-  },
-  "dependencies": {
-    "axe-html-reporter": "^2.2.11"
+    "axe-core": "^4.10.3",
+    "axe-html-reporter": "^2.2.11",
+    "k6": "^0.0.0"
   }
 }

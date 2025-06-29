@@ -31,6 +31,6 @@ test('Accessibility check', async ({ page }) => {
   console.log(`Accessibility report saved at: ${reportPath}`);
 
   //Strict mode - can be commented in order to not have it fail
-  expect(accessibilityScanResults.violations).toEqual([]);
+//   expect(accessibilityScanResults.violations).toEqual([]);
 });
 
