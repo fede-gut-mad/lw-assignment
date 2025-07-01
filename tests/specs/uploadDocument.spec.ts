@@ -20,8 +20,11 @@ export const Languages = {
 //     const translator = new TranslatorWidget(page);
 
 //     await translator.selectLanguage(Languages.Danish, deviceType);
+//     await page.waitForTimeout(3000)
 //     await translator.uploadFile('tests/data/testSlide.pptx');
+//     await page.waitForTimeout(3000)
 //     await translator.assertFileUploadVisible('testSlide.pptx');
+//     await page.waitForTimeout(3000)
 //     await translator.clickTranslateTo(Languages.Danish);
 
 //     // Check for error popup in iframe before API validations

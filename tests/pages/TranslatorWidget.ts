@@ -27,6 +27,7 @@ export class TranslatorWidget {
       await this.frame.getByRole('button', { name: 'English (UK)' }).click();
       await this.frame.getByText(language).click();
     } else {
+      await this.frame.locator('text=English (UK)keyboard_arrow_down').waitFor({ timeout: 10000 });
       await this.frame.getByText('English (UK)keyboard_arrow_down').click();
       await this.frame.getByText(language).click();
     }
