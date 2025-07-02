@@ -16,6 +16,7 @@ export const Languages = {
     Swedish: 'Swedish',
 }
 
+// Commenting due to flakyness
 // test('Upload & Translate document', async ({page, deviceType}) => {
 //     const translator = new TranslatorWidget(page);
 

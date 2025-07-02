@@ -4,7 +4,6 @@ import '../fixtures/testSetup';
 import { createHtmlReport } from 'axe-html-reporter';
 import path from 'path';
 
-// ✅ Use a relative path to avoid axe-html-reporter from mangling it
 const reportDir = 'tests/reports';
 const reportName = 'accessibility-report.html';
 
@@ -14,12 +13,11 @@ test('Accessibility check', async ({ page }) => {
   createHtmlReport({
     results: accessibilityScanResults,
     options: {
-      outputDir: reportDir,         // ✅ RELATIVE PATH ONLY
+      outputDir: reportDir,    
       reportFileName: reportName,
     },
   });
 
-  // ✅ Log the absolute path cleanly for your reference
   const fullPath = path.join(process.cwd(), reportDir, reportName);
   console.log(`Accessibility report saved at: ${fullPath}`);
 
